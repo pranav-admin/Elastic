@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: filebeat-config
-  namespace: elastic
+  namespace: kube-system
   labels:
     k8s-app: filebeat
 data:
@@ -34,17 +34,19 @@ data:
       - add_cloud_metadata:
       - add_host_metadata:
 
+    cloud.id: ${ELASTIC_CLOUD_ID}
+    cloud.auth: ${ELASTIC_CLOUD_AUTH}
+
     output.elasticsearch:
-      hosts: ["http://elasticsearch.logging.svc.cluster.local:9200"]
+      hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
       username: ${ELASTICSEARCH_USERNAME}
       password: ${ELASTICSEARCH_PASSWORD}
-
 ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: filebeat
-  namespace: elastic
+  namespace: kube-system
   labels:
     k8s-app: filebeat
 spec:
@@ -132,7 +134,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: filebeat
-  namespace: elastic
+  namespace: kube-system
 roleRef:
   kind: ClusterRole
   name: filebeat
@@ -142,11 +144,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: filebeat
-  namespace: elastic
+  namespace: kube-system
 subjects:
   - kind: ServiceAccount
     name: filebeat
-    namespace: elastic
+    namespace: kube-system
 roleRef:
   kind: Role
   name: filebeat
@@ -156,11 +158,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: filebeat-kubeadm-config
-  namespace: elastic
+  namespace: kube-system
 subjects:
   - kind: ServiceAccount
     name: filebeat
-    namespace: elastic
+    namespace: kube-system
 roleRef:
   kind: Role
   name: filebeat-kubeadm-config
@@ -192,7 +194,7 @@ kind: Role
 metadata:
   name: filebeat
   # should be the namespace where filebeat is running
-  namespace: elastic
+  namespace: kube-system
   labels:
     k8s-app: filebeat
 rules:
@@ -206,7 +208,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: filebeat-kubeadm-config
-  namespace: elastic
+  namespace: kube-system
   labels:
     k8s-app: filebeat
 rules:
@@ -221,7 +223,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: filebeat
-  namespace: elastic
+  namespace: kube-system
   labels:
     k8s-app: filebeat
 ---
