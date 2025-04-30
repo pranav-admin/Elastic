@@ -10,15 +10,19 @@ kubectl create namespace web-apps
 ```bash
  kubectl apply -f web1.yaml
 
-```kubectl apply -f web2.yaml```
+```bash
+kubectl apply -f web2.yaml
 
 Deploy Elasticsearch in logging Namespace
-```kubectl create namespace elastic```
-```kubectl apply -f elasticsearch.yaml```
+```bash
+kubectl create namespace elastic
+```bash
+kubectl apply -f elasticsearch.yaml
 
 
 Verify Elasticsearch Pod & PVC
-```kubectl get pods -n elastic```
+```bash
+kubectl get pods -n elastic```
 
 ```kubectl get pvc -n elastic```
 
