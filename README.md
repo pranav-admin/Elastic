@@ -1,7 +1,7 @@
 # Elastic
 ELK Stack (Elasticsearch, Filebeat, Kibana) to Collect Logs from Applications On Kubernetes Cluster
 
-Requirements (H2)
+## Requirements (H2)
 - k8s cluster
 
 Deploy Sample Applications in web-app Namespace
