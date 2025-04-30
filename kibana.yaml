@@ -16,6 +16,7 @@ spec:
       containers:
         - name: kibana
           image: docker.elastic.co/kibana/kibana:7.17.0
+          imagePullPolicy: IfNotPresent
           env:
             - name: ELASTICSEARCH_HOSTS
               value: http://elasticsearch:9200
@@ -28,9 +29,9 @@ metadata:
   name: kibana
   namespace: elastic
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: kibana
   ports:
     - port: 5601
-      nodePort: 30601
+      targetPort: 5601
