@@ -9,7 +9,7 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  storageClassName: standard
+  storageClassName: nfs-client
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,6 +29,7 @@ spec:
       containers:
         - name: elasticsearch
           image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+          imagePullPolicy: IfNotPresent
           env:
             - name: discovery.type
               value: single-node
@@ -39,6 +40,9 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
               name: elasticsearch-storage
+          securityContext:
+           capabilities:
+            add: ["CAP_SYS_CHROOT"]
       volumes:
         - name: elasticsearch-storage
           persistentVolumeClaim:
@@ -55,4 +59,4 @@ spec:
   ports:
     - protocol: TCP
       port: 9200
-      targetPort: 9200
+      targetPort: 9200  
