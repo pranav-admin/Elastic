@@ -4,6 +4,41 @@ ELK Stack (Elasticsearch, Filebeat, Kibana) to Collect Logs from Applications On
 ## Requirements 
 - k8s cluster
 
+
+## Using StorageClass to Dynamically provision a volume (Optional)
+### Install NFS Server utilities on Control Plane and Client utilities on Worker nodes
+```bash
+ dnf install nfs-utils* -y
+```
+```bash
+ mkdir /app
+```
+```bash
+chmod 777 /app
+```
+```bash
+vim /etc/exports
+
+     /app *(rw,sync)
+```
+
+```bash
+systemctl enable --now nfs-server
+```
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+```bash
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server=master --set nfs.path=/app
+```
+```bash
+kubectl get storageclass
+```
+
 ## Deploy Sample Applications in web-app Namespace
 ```bash
 kubectl create namespace web-apps
