@@ -9,6 +9,7 @@ kubectl create namespace web-apps
 
 ```bash
  kubectl apply -f web1.yaml
+---
 
 ```bash
 kubectl apply -f web2.yaml
