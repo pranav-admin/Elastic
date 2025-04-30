@@ -26,7 +26,7 @@ kubectl apply -f elasticsearch.yaml
 
 ## Verify Elasticsearch Pod & PVC
 ```bash
-kubectl get pods -n elastic```
+kubectl get pods -n elastic
 ```
 ```bash
 kubectl get pvc -n elastic
