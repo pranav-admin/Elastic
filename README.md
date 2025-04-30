@@ -16,7 +16,7 @@ kubectl create namespace web-apps
 ```bash
 kubectl apply -f web2.yaml
 ```
-## Deploy Elasticsearch in logging Namespace
+## Deploy Elasticsearch in elastic Namespace
 ```bash
 kubectl create namespace elastic
 ```
