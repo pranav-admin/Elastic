@@ -7,7 +7,7 @@ Requirements
 Deploy Sample Applications in web-app Namespace
 kubectl create namespace web-apps
 
-```kubectl apply -f web1.yaml```
+``` bash kubectl apply -f web1.yaml```
 
 ```kubectl apply -f web2.yaml```
 
