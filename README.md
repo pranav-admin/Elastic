@@ -5,7 +5,7 @@ Requirements
 - k8s cluster
 
 Deploy Sample Applications in web-app Namespace
-kubectl create namespace web-apps
+    kubectl create namespace web-apps
 
 kubectl apply -f web1.yaml
 
