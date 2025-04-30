@@ -7,7 +7,7 @@ Requirements
 Deploy Sample Applications in web-app Namespace
 kubectl create namespace web-apps
 
-``` bash kubectl apply -f web1.yaml```
+```kubectl apply -f web1.yaml```
 
 ```kubectl apply -f web2.yaml```
 
@@ -36,7 +36,7 @@ Download Filebeat Kubernetes Manifest from Elastic
 
 ```curl -L -O https://raw.githubusercontent.com/elastic/beats/7.17/deploy/kubernetes/filebeat-kubernetes.yaml```
 
-```Modify filebeat-kubernetes.yaml file```
+Modify filebeat-kubernetes.yaml file
 
     Update ELASTICSEARCH_HOST with = http://elasticsearch.elastic.svc.cluster.local:9200
     Add the namespace "elastic" to the Filebeat pod annotations if you want namespace-specific logs.
