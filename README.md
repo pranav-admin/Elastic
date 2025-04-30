@@ -5,39 +5,38 @@ Requirements
 - k8s cluster
 
 Deploy Sample Applications in web-app Namespace
-    kubectl create namespace web-apps
+kubectl create namespace web-apps
 
-kubectl apply -f web1.yaml
+```kubectl apply -f web1.yaml```
 
-kubectl apply -f web2.yaml
+```kubectl apply -f web2.yaml```
 
 Deploy Elasticsearch in logging Namespace
-kubectl create namespace elastic
-
-kubectl apply -f elasticsearch.yaml
+```kubectl create namespace elastic```
+```kubectl apply -f elasticsearch.yaml```
 
 
 Verify Elasticsearch Pod & PVC
-kubectl get pods -n elastic
+```kubectl get pods -n elastic```
 
-kubectl get pvc -n elastic
+```kubectl get pvc -n elastic```
 
-kubectl get pv -n elastic
+```kubectl get pv -n elastic```
 
 
 Deploy Kibana in elastic Namespace
-kubectl apply -f kibana.yaml
+```kubectl apply -f kibana.yaml```
 
 Verify Kibana
 
-kubectl get pods -n elastic
+```kubectl get pods -n elastic```
 
 Deploy Filebeat as a DaemonSet
 Download Filebeat Kubernetes Manifest from Elastic
 
-curl -L -O https://raw.githubusercontent.com/elastic/beats/7.17/deploy/kubernetes/filebeat-kubernetes.yaml
+```curl -L -O https://raw.githubusercontent.com/elastic/beats/7.17/deploy/kubernetes/filebeat-kubernetes.yaml```
 
-Modify filebeat-kubernetes.yaml file
+```Modify filebeat-kubernetes.yaml file```
 
     Update ELASTICSEARCH_HOST with = http://elasticsearch.elastic.svc.cluster.local:9200
     Add the namespace "elastic" to the Filebeat pod annotations if you want namespace-specific logs.
@@ -45,7 +44,7 @@ Modify filebeat-kubernetes.yaml file
 
 Deploy Filebeat
 
-kubectl apply -f filebeat-kubernetes-updated.yaml
+```kubectl apply -f filebeat-kubernetes-updated.yaml```
 
 On Kibana
 
@@ -59,9 +58,9 @@ On Kibana
 
 Verify the Logs from the apps
 
-kubectl logs web1 -n web-apps | tail
+```kubectl logs web1 -n web-apps | tail```
 
-kubectl logs web2 -n web-apps | head
+```kubectl logs web2 -n web-apps | head```
 
 Verify it from Kibana UI
 
@@ -71,7 +70,7 @@ Verify it from Kibana UI
 
 Now, Deploy and Log an NGINX application
 
-kubectl apply -f nginx-deployment.yaml
+```kubectl apply -f nginx-deployment.yaml```
 
 
 Create some Filters in Kibana to examine Nginx logs
